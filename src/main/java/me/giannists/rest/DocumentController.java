@@ -36,6 +36,17 @@ public class DocumentController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createNewDocument(@RequestBody @Valid DocumentDto documentDto) {
 
+        return ResponseEntity.ok(
+                DocumentDto.of(
+                    documentService.createNewDocument(
+                            Document.builder()
+                                    .author(documentDto.getAuthor())
+                                    .title(documentDto.getTitle())
+                                    .type(documentDto.getType())
+                                    .build())
+                )
+        )
+
         return documentService.createNewDocument(
                 Document.builder()
                     .author(documentDto.getAuthor())

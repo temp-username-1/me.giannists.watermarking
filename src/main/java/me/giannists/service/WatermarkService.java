@@ -18,7 +18,7 @@ public class WatermarkService {
     @Autowired
     private DocumentDao documentDao;
 
-    public Optional<Watermark> createNewWatermark(Watermark watermark, BigInteger documentId) {
+    public Watermark createNewWatermark(Watermark watermark, BigInteger documentId) {
 
         Document document = Optional.ofNullable(documentDao.findOne(documentId))
                 .orElseThrow(() -> new EntityNotFoundException("Document not found. Id: " + documentId));
@@ -27,6 +27,6 @@ public class WatermarkService {
         documentDao.save(document);
 
         log.info("{class=WatermarkService, method=createNewWatermark, documentId={}}", documentId);
-        return Optional.of(watermark);
+        return watermark;
     }
 }

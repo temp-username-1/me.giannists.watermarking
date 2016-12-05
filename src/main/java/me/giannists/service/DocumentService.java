@@ -14,8 +14,8 @@ public class DocumentService {
     @Autowired
     private DocumentDao documentDao;
 
-    public Optional<Document> createNewDocument(Document document) {
-        return Optional.of(documentDao.save(document));
+    public Document createNewDocument(Document document) {
+        return documentDao.save(document);
     }
 
     public Optional<Document> findOne(BigInteger id) {
