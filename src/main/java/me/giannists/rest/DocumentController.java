@@ -37,26 +37,13 @@ public class DocumentController {
     public ResponseEntity createNewDocument(@RequestBody @Valid DocumentDto documentDto) {
 
         return ResponseEntity.ok(
-                DocumentDto.of(
-                    documentService.createNewDocument(
-                            Document.builder()
-                                    .author(documentDto.getAuthor())
-                                    .title(documentDto.getTitle())
-                                    .type(documentDto.getType())
-                                    .build())
-                )
-        )
-
-        return documentService.createNewDocument(
+            DocumentDto.of(
+                documentService.createNewDocument(
                 Document.builder()
-                    .author(documentDto.getAuthor())
-                    .title(documentDto.getTitle())
-                    .type(documentDto.getType())
-                    .build())
-            .map(DocumentDto::of)
-            .map(ResponseEntity::ok)
-            .map(ResponseEntity.class::cast)
-            .orElse(ResponseEntity.notFound().build());
+                        .author(documentDto.getAuthor())
+                        .title(documentDto.getTitle())
+                        .type(documentDto.getType())
+                        .build())));
     }
 
     @ApiResponses(value = {
@@ -66,18 +53,17 @@ public class DocumentController {
     @RequestMapping(path = "{id}/watermarks", method = RequestMethod.POST)
     public ResponseEntity createWatermark(@RequestBody WatermarkDto watermarkDto,
                                           @PathVariable BigInteger id) {
-
-        return watermarkService.createNewWatermark(
-                Watermark.builder()
-                        .content(watermarkDto.getContent())
-                        .title(watermarkDto.getTitle())
-                        .author(watermarkDto.getAuthor())
-                        .topic(watermarkDto.getTopic())
-                        .build(), id)
-                .map(WatermarkDto::of)
-                .map(ResponseEntity::ok)
-                .map(ResponseEntity.class::cast)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(
+                WatermarkDto.of(
+                        watermarkService.createNewWatermark(
+                                Watermark.builder()
+                                        .content(watermarkDto.getContent())
+                                        .title(watermarkDto.getTitle())
+                                        .author(watermarkDto.getAuthor())
+                                        .topic(watermarkDto.getTopic())
+                                        .build(), id)
+                )
+        );
     }
 
     @ApiResponses(value = {

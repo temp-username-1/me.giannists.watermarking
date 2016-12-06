@@ -14,4 +14,7 @@ public class ExceptionManagedController {
     @ExceptionHandler(EntityNotFoundException.class)
     public void notFound() {}
 
+    @ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Bad Request")
+    @ExceptionHandler(IllegalArgumentException.class)
+    public void badRequest() {}
 }
