@@ -2,7 +2,7 @@
 
 ## How to run
 
-  - first clone the github project by cloning the current project
+  - first clone the current github project
   - cd to the project's directory
   - type `mvn spring-boot:run`
 
